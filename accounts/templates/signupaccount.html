@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <style>
+        /* 全局样式设置 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 卡片容器样式 */
+     .card-container {
+            max-width: 450px;
+            width: 100%;
+            margin: 0 auto;
+            animation: fadeInUp 0.5s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden; /* 隐藏超出卡片部分的内容，避免布局混乱 */
+        }
+
+        /* 卡片头部样式 */
+     .card-header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            animation: fadeInDown 0.5s ease;
+            animation-delay: 0.2s;
+        }
+
+        /* 卡片主体样式 */
+     .card-body {
+            padding: 30px;
+            background-color: white;
+            animation: fadeIn 0.5s ease;
+            animation-delay: 0.4s;
+        }
+
+        /* 标题样式优化 */
+     .card-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        /* 表单样式 */
+     .form-group {
+            margin-bottom: 20px;
+            position: relative;
+            animation: fadeIn 0.5s ease;
+            animation-delay: 0.6s;
+        }
+
+        /* 表单标签样式 */
+     .form-group label {
+            font-size: 16px;
+            color: #555;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        /* 输入框样式优化 */
+     .form-control {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            height: 45px;
+            padding: 0 15px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+      .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+
+        /* 输入框获取焦点时标签上移效果 */
+     .form-group input[type="text"]:focus + label,
+     .form-group input[type="password"]:focus + label,
+     .form-group input[type="email"]:focus + label {
+            top: -10px;
+            left: 10px;
+            font-size: 12px;
+            color: #007bff;
+            transition: all 0.3s ease;
+        }
+
+        /* 输入框占位符样式 */
+     .form-control::placeholder {
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        /* 按钮样式优化 */
+     .btn.btn-primary {
+            font-size: 18px;
+            padding: 12px 0;
+            border-radius: 5px;
+            background-color: #007bff;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+      .btn.btn-primary:hover {
+            background-color: #0069d9;
+            transform: translateY(-2px);
+        }
+
+        /* 错误提示样式优化 */
+     .alert.alert-danger {
+            margin-top: 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            font-size: 14px;
+            animation: fadeInDown 0.5s ease;
+            animation-delay: 0.8s;
+        }
+
+      .alert.alert-danger::before {
+            content: "\f071";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            font-size: 20px;
+            color: #dc3545;
+            margin-right: 10px;
+        }
+
+        /* 注册按钮点击时的动画效果 */
+     .btn.btn-primary:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        /* 动画关键帧定义 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 媒体查询适配不同屏幕尺寸 */
+        @media (max-width: 768px) {
+          .card-container {
+                max-width: 90%;
+            }
+
+         .card-title {
+                font-size: 24px;
+            }
+
+         .form-control {
+                font-size: 14px;
+            }
+
+         .btn.btn-primary {
+                font-size: 16px;
+            }
+        }
+
+        /* 页面加载时整体淡入效果 */
+        html {
+            animation: pageLoadFadeIn 1s ease;
+        }
+
+        @keyframes pageLoadFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+  {% load form_tags %}
+    <div class="card-container">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">注册</h5>
+            </div>
+            <div class="card-body">
+                {% if error %}
+                <div class="alert alert-danger mt-3" role="alert">
+                    {{ error }}
+                </div>
+                {% endif %}
+                <form method="POST">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field|add_class:"form-control" }}
+                    </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary">
+                        注册
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 为每个输入框添加输入事件监听器，实现输入内容时标签上移效果（与前面CSS配合）
+            const inputs = document.querySelectorAll('input[type="text"], input[type="password"], input[type="email"]');
+            inputs.forEach(function (input) {
+                const label = input.previousElementSibling;
+                input.addEventListener('input', function () {
+                    if (this.value.trim()!== '') {
+                        label.style.top = '-10px';
+                        label.style.left = '10px';
+                        label.style.fontSize = '12px';
+                        label.style.color = '#007bff';
+                    } else {
+                        label.style.top = '15px';
+                        label.style.left = '15px';
+                        label.style.fontSize = '16px';
+                        label.style.color = '#555';
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

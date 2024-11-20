@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* 全局样式设置 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+            /* 渐变背景，增加层次感 */
+            min-height: 100vh;
+            /* 确保页面至少占满视口高度 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 卡片容器样式 */
+     .card-container {
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+            /* 水平居中 */
+            animation: fadeInUp 0.5s ease;
+            /* 淡入上移动画效果 */
+        }
+
+        /* 卡片样式优化 */
+     .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* 增强阴影效果，更立体 */
+            padding: 30px;
+            background-color: white;
+            /* 卡片内部背景设为白色，与背景区分更明显 */
+            border: 1px solid #e0e0e0;
+            /* 增加细微边框 */
+            transition: transform 0.3s ease;
+            /* 添加鼠标悬停时缩放效果 */
+        }
+
+     .card:hover {
+            transform: scale(1.02);
+            /* 鼠标悬停时卡片稍放大，增加交互感 */
+        }
+
+        /* 标题样式优化 */
+     .card-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+            /* 标题淡入动画 */
+        }
+
+        /* 表单组样式 */
+     .form-group {
+            margin-bottom: 20px;
+            position: relative;
+            /* 为后续输入框特效做准备 */
+            animation: fadeIn 0.5s ease;
+            /* 淡入动画 */
+            animation-delay: 0.2s;
+            /* 延迟一点出现，营造顺序感 */
+            animation-fill-mode: both;
+            /* 动画结束后保持状态 */
+        }
+
+        /* 表单标签样式 */
+     .form-group label {
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* 输入框样式优化 */
+     .form-control {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            height: 45px;
+            /* 适当增加输入框高度 */
+            padding: 0 15px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            /* 过渡效果 */
+        }
+
+      .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+
+        /* 输入框占位符样式 */
+     .form-control::placeholder {
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        /* 为输入框添加底部线条动画效果 */
+     .form-group input[type="text"]:focus + label,
+     .form-group input[type="password"]:focus + label {
+            top: -10px;
+            /* 输入框获取焦点时，标签上移 */
+            left: 10px;
+            font-size: 12px;
+            color: #007bff;
+            transition: all 0.3s ease;
+            /* 过渡动画 */
+        }
+
+      .form-group label {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            pointer-events: none;
+            /* 让标签不阻挡输入框点击事件 */
+            transition: all 0.3s ease;
+            /* 过渡动画 */
+        }
+
+        /* 按钮样式优化 */
+     .btn.btn-primary.btn-block {
+            font-size: 18px;
+            padding: 12px 0;
+            border-radius: 5px;
+            background-color: #007bff;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            /* 背景色和缩放效果过渡 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* 按钮阴影效果 */
+        }
+
+      .btn.btn-primary.btn-block:hover {
+            background-color: #0069d9;
+            transform: translateY(-2px);
+            /* 鼠标悬停时按钮上移一点，增加立体感 */
+        }
+
+        /* 错误提示样式优化 */
+     .alert.alert-danger {
+            margin-top: 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            font-size: 14px;
+            animation: fadeInDown 0.5s ease;
+            /* 淡入下落动画 */
+            animation-delay: 0.4s;
+            /* 延迟出现，营造顺序感 */
+            animation-fill-mode: both;
+            /* 动画结束后保持状态 */
+        }
+
+      .alert.alert-danger::before {
+            content: "\f071";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            font-size: 20px;
+            color: #dc3545;
+            margin-right: 10px;
+        }
+
+        /* 动画关键帧定义 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 媒体查询适配不同屏幕尺寸 */
+        @media (max-width: 768px) {
+          .card-container {
+                max-width: 90%;
+            }
+
+         .card-title {
+                font-size: 24px;
+            }
+
+         .form-control {
+                font-size: 14px;
+            }
+
+         .btn.btn-primary.btn-block {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    {% load form_tags %}
+
+    <div class="card-container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">登录</h5>
+                {% if error %}
+                <div class="alert alert-danger mt-3" role="alert">
+                    {{ error }}
+                </div>
+                {% endif %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                        {{ form.username|add_class:"form-control" }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                        {{ form.password|add_class:"form-control" }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        登录
+                    </button>
+                </form>
+                <!-- 添加注册链接 -->
+                <a href="{% url 'signupaccount' %}" class="register-link" id="register-link">还没有账号？点击注册</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const usernameLabel = document.querySelector('label[for="{{ form.username.id_for_label }}"]');
+            const usernameInput = document.getElementById('{{ form.username.id_for_label }}');
+            const passwordLabel = document.querySelector('label[for="{{ form.password.id_for_label }}"]');
+            const passwordInput = document.getElementById('{{ form.password.id_for_label }}');
+
+            usernameInput.addEventListener('input', function () {
+                if (this.value.trim()!== '') {
+                    usernameLabel.style.visibility = 'hidden';
+                } else {
+                    usernameLabel.style.visibility = 'visible';
+                }
+            });
+
+            passwordInput.addEventListener('input', function () {
+                if (this.value.trim()!== '') {
+                    passwordLabel.style.visibility = 'hidden';
+                } else {
+                    passwordLabel.style.visibility = 'visible';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
