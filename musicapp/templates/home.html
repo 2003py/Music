@@ -1,19 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>小丑音乐网</title>
-    <style>
-        h1 {
-            text-align: center;
-            position: relative;
-            top: 200px;
-        }
-    </style>
-</head>
 {% extends "base.html" %}
-{% block content %}
-    <h1>欢迎来到小丑音乐网！！！</h1>
-{% endblock content %}
 
-</html>
+{% block content %}
+    <div class="jumbotron text-center">
+        <h1 class="display-6">欢迎来到小丑音乐网</h1>
+        <p class="lead">在这里发现你喜爱的音乐，享受美妙的旋律。</p>
+        <hr class="my-4">
+        <p>我们拥有海量的音乐资源，满足你的各种音乐口味。</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">探索音乐分类</a>
+    </div>
+
+    <!-- 展示热门音乐推荐板块，示例使用简单的卡片布局，可根据实际数据动态渲染 -->
+    <h2 class="text-center mt-5">热门音乐推荐</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card">
+                <img src="media/media_posters/野心.jpg" class="card-img-top" alt="Music 1">
+                <div class="card-body">
+                    <h5 class="card-title">野心</h5>
+                    <p class="card-text">这是一首热门的流行歌曲，旋律动听，广受好评。</p>
+                    <a href="#" class="btn btn-primary">播放</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="media/media_posters/the.jpg" class="card-img-top" alt="Music 2">
+                <div class="card-body">
+                    <h5 class="card-title">The Way I Still Love You</h </h5>
+                    <p class="card-text">这是一首超惊艳的前奏，以及充满磁性的嗓音，除此之外歌词也很触动人心</p>
+                    <a href="#" class="btn btn-primary">播放</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="media/media_posters/珊瑚海.jpg" class="card-img-top" alt="Music 3">
+                <div class="card-body">
+                    <h5 class="card-title">歌曲名称 3</h5>
+                    <p class="card-text">舒缓的轻音乐，放松身心的绝佳选择。</p>
+                    <a href="#" class="btn btn-primary">播放</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

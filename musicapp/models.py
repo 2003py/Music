@@ -2,12 +2,10 @@ from django.db import models
 import os
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-
+from django.contrib.auth.models import User
 
 def validate_audio_video_file(value):
-    """
-    验证上传的文件是音频（mp3）或者视频（常见视频格式）格式
-    """
+
     ext = os.path.splitext(value.name)[1].lower()
     # 这里对文件格式做判断
     allowed_audio_extensions = ['.mp3']
@@ -29,3 +27,4 @@ class Music(models.Model):
     media_type = models.CharField(max_length=5, choices=MEDIA_TYPE_CHOICES, verbose_name='媒体类型'
                                   , default='未知',)
     lyrics = models.TextField(blank=True, null=True, verbose_name='歌词')
+
